@@ -59,8 +59,8 @@ function computeArgumentScores(
 function buildInsights(
   validity: Record<string, unknown> | null,
   reconstruction: Record<string, unknown> | null,
-  tensions: Array<Record<string, unknown>>,
-  ambiguities: Array<Record<string, unknown>>,
+  tensions: unknown[],
+  ambiguities: unknown[],
   propositions: Proposition[]
 ): Insight[] {
   const insights: Insight[] = [];
@@ -82,22 +82,24 @@ function buildInsights(
       affectedNodeIds: propositions.map((p) => p.id),
     });
   }
-  tensions.forEach((t) => {
+  tensions.forEach((t: unknown) => {
+    const r = t as Record<string, unknown>;
     insights.push({
       id: `insight_${Math.random().toString(36).slice(2, 10)}`,
       engineType: 'adversarial',
-      content: (t.description as string) ?? '',
-      keyQuestion: (t.probingQuestion as string) ?? undefined,
-      affectedNodeIds: (t.propositionIds ?? t.proposition_ids ?? []) as string[],
+      content: (r.description as string) ?? '',
+      keyQuestion: (r.probingQuestion as string) ?? undefined,
+      affectedNodeIds: (r.propositionIds ?? r.proposition_ids ?? []) as string[],
     });
   });
-  ambiguities.forEach((a) => {
+  ambiguities.forEach((a: unknown) => {
+    const r = a as Record<string, unknown>;
     insights.push({
       id: `insight_${Math.random().toString(36).slice(2, 10)}`,
       engineType: 'assumption',
-      content: `The term '${(a.ambiguousTerm as string) ?? ''}' is ambiguous in your argument.`,
-      keyQuestion: (a.questionForUser as string) ?? undefined,
-      affectedNodeIds: (a.propositionIds ?? a.proposition_ids ?? []) as string[],
+      content: `The term '${(r.ambiguousTerm as string) ?? ''}' is ambiguous in your argument.`,
+      keyQuestion: (r.questionForUser as string) ?? undefined,
+      affectedNodeIds: (r.propositionIds ?? r.proposition_ids ?? []) as string[],
     });
   });
   return insights;
