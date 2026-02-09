@@ -22,13 +22,12 @@ export const BiasDashboard = ({ graphState, onNodeSelect }: BiasDashboardProps) 
   }, [graphState.biases.length]);
 
   // Overall argument strength (average of all scores)
+  const scores = graphState.argumentScores ?? [];
   const overallScore = useMemo(() => {
-    if (graphState.argumentScores.length === 0) return null;
-    const avg =
-      graphState.argumentScores.reduce((sum, s) => sum + s.score, 0) /
-      graphState.argumentScores.length;
+    if (scores.length === 0) return null;
+    const avg = scores.reduce((sum, s) => sum + s.score, 0) / scores.length;
     return avg;
-  }, [graphState.argumentScores]);
+  }, [scores]);
 
   const scoreColor = overallScore
     ? overallScore > 0.7
@@ -39,7 +38,7 @@ export const BiasDashboard = ({ graphState, onNodeSelect }: BiasDashboardProps) 
     : colors.textMuted;
 
   // Don't render if no biases and no scores
-  if (graphState.biases.length === 0 && graphState.argumentScores.length === 0) return null;
+  if (graphState.biases.length === 0 && scores.length === 0) return null;
 
   return (
     <div className="border-b border-gray-200 bg-white shrink-0">
