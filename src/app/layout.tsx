@@ -1,35 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter, Merriweather, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import './globals.css';
 
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const merriweather = Merriweather({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-merriweather',
-  display: 'swap',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-jetbrains-mono',
-  display: 'swap',
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['700'],
-  variable: '--font-space-grotesk',
-  display: 'swap',
-});
+// Fonts loaded at runtime via link (avoids build-time fetch; fixes Railway/sandbox builds)
+const FONTS_URL =
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&family=Merriweather:wght@400;700&family=Space+Grotesk:wght@700&display=swap';
 
 export const metadata: Metadata = {
   title: 'CLARITY — Formal Reasoning Infrastructure',
@@ -42,8 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${merriweather.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href={FONTS_URL} rel="stylesheet" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* ===== Font variables (set by layout link; no build-time fetch) ===== */
+:root {
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-merriweather: 'Merriweather', Georgia, serif;
+  --font-jetbrains-mono: 'JetBrains Mono', monospace;
+  --font-space-grotesk: 'Space Grotesk', system-ui, sans-serif;
+}
+
 /* ===== Smooth Scrollbar ===== */
 ::-webkit-scrollbar {
   width: 8px;

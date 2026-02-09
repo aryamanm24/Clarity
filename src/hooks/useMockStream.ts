@@ -47,7 +47,7 @@ export const useMockStream = () => {
       const events: { delay: number; update: Partial<GraphState> }[] = [];
 
       // Phase 1 (0-800ms): Propositions appear one by one
-      scenario.propositions.forEach((_, i) => {
+      scenario.propositions.forEach((_: unknown, i: number) => {
         events.push({
           delay: 200 + i * 150,
           update: {

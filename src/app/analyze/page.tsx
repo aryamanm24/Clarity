@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { Suspense, useState, useEffect, useCallback, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Header } from '@/components/layout/Header';
@@ -17,7 +17,7 @@ const SUGGESTIONS = ['Should I change careers?', 'Is this business idea viable?'
 const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000/ws/voice';
 const EXPLAIN_WS_URL = process.env.NEXT_PUBLIC_WS_URL?.replace('/ws/voice', '/ws/explain') || 'ws://localhost:8000/ws/explain';
 
-export default function AnalyzePage() {
+function AnalyzePageContent() {
   const searchParams = useSearchParams();
   const { graphState, isAnalyzing, analysisPhase, error, startAnalysis, reset, applyVoiceResult, triggerVoiceAnalysis } =
     useAnalysisStream();
@@ -637,6 +637,14 @@ export default function AnalyzePage() {
         />
       </main>
     </div>
+  );
+}
+
+export default function AnalyzePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 dark:bg-[#0d0e10] flex items-center justify-center font-inter">Loading…</div>}>
+      <AnalyzePageContent />
+    </Suspense>
   );
 }
 

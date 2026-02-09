@@ -281,7 +281,7 @@ export function useAnalysisStream() {
               const raw = line.slice(6).trim();
               if (raw === '[DONE]' || raw === '') continue;
               const event = JSON.parse(raw) as { type: string; data?: Record<string, unknown> };
-              const data = event.data ?? event;
+              const data = (event.data ?? event) as Record<string, unknown>;
 
               switch (event.type) {
                 case 'analysis_started':
@@ -446,7 +446,7 @@ export function useAnalysisStream() {
               const raw = line.slice(6).trim();
               if (raw === '[DONE]' || raw === '') continue;
               const event = JSON.parse(raw) as { type: string; data?: Record<string, unknown> };
-              const data = event.data ?? event;
+              const data = (event.data ?? event) as Record<string, unknown>;
 
               switch (event.type) {
                 case 'analysis_started':
