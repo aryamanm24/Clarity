@@ -531,7 +531,7 @@ export const InsightPanel = ({ graphState, selectedNodeId, onNodeSelect, isAnaly
   );
 
   const selectedScore = useMemo(
-    () => graphState.argumentScores.find((s) => s.propositionId === selectedNodeId),
+    () => (graphState.argumentScores ?? []).find((s) => s.propositionId === selectedNodeId),
     [graphState.argumentScores, selectedNodeId]
   );
 
