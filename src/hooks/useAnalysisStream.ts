@@ -69,7 +69,7 @@ function buildInsights(
       id: `insight_${Math.random().toString(36).slice(2, 10)}`,
       engineType: 'precision',
       content: validity.validityExplanation as string,
-      keyQuestion: null,
+      keyQuestion: undefined,
       affectedNodeIds: propositions.filter((p) => p.type === 'claim').map((p) => p.id),
     });
   }
@@ -78,7 +78,7 @@ function buildInsights(
       id: `insight_${Math.random().toString(36).slice(2, 10)}`,
       engineType: 'signal',
       content: reconstruction.presentableArgument as string,
-      keyQuestion: null,
+      keyQuestion: undefined,
       affectedNodeIds: propositions.map((p) => p.id),
     });
   }
@@ -87,7 +87,7 @@ function buildInsights(
       id: `insight_${Math.random().toString(36).slice(2, 10)}`,
       engineType: 'adversarial',
       content: (t.description as string) ?? '',
-      keyQuestion: (t.probingQuestion as string) ?? null,
+      keyQuestion: (t.probingQuestion as string) ?? undefined,
       affectedNodeIds: (t.propositionIds ?? t.proposition_ids ?? []) as string[],
     });
   });
@@ -96,7 +96,7 @@ function buildInsights(
       id: `insight_${Math.random().toString(36).slice(2, 10)}`,
       engineType: 'assumption',
       content: `The term '${(a.ambiguousTerm as string) ?? ''}' is ambiguous in your argument.`,
-      keyQuestion: (a.questionForUser as string) ?? null,
+      keyQuestion: (a.questionForUser as string) ?? undefined,
       affectedNodeIds: (a.propositionIds ?? a.proposition_ids ?? []) as string[],
     });
   });
