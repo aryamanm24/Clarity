@@ -573,14 +573,14 @@ export const InsightPanel = ({ graphState, selectedNodeId, onNodeSelect, isAnaly
               exit={{ opacity: 0 }}
             >
               {/* Section 1: Gemini's Reasoning */}
-              {graphState.thoughtSummaries.length > 0 && (
+              {(graphState.thoughtSummaries ?? []).length > 0 && (
                 <CollapsibleSection
                   title="Gemini's Reasoning"
                   icon="🧠"
                   accentColor={colors.claim}
                   defaultOpen={true}
                 >
-                  {graphState.thoughtSummaries
+                  {(graphState.thoughtSummaries ?? [])
                     .slice()
                     .reverse()
                     .map((ts, i) => (
@@ -662,15 +662,15 @@ export const InsightPanel = ({ graphState, selectedNodeId, onNodeSelect, isAnaly
               )}
 
               {/* Section 3: Fact Check */}
-              {graphState.groundingResults.length > 0 && (
+              {(graphState.groundingResults ?? []).length > 0 && (
                 <CollapsibleSection
                   title="Fact Check"
                   icon="📊"
-                  count={graphState.groundingResults.length}
+                  count={(graphState.groundingResults ?? []).length}
                   accentColor={colors.evidence}
                   defaultOpen={true}
                 >
-                  {graphState.groundingResults.map((g, i) => (
+                  {(graphState.groundingResults ?? []).map((g, i) => (
                     <GroundingCard key={i} result={g} />
                   ))}
                 </CollapsibleSection>
