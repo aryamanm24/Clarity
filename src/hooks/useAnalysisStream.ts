@@ -17,23 +17,16 @@ export type AnalysisPhase = 'idle' | 'parsing' | 'analyzing' | 'complete' | 'err
 
 function normalizeRelationships(
   rels: Relationship[] | unknown[],
-  r: Relationship & { source?: string; target?: string; from?: string; to?: string }
-) {
-  return rels.map((rel: Relationship | Record<string, unknown>) => ({
-    ...rel,
-    fromId:
-      (rel as Record<string, unknown>).fromId ??
-      (rel as Record<string, unknown>).from_id ??
-      (rel as Record<string, unknown>).source ??
-      (rel as Record<string, unknown>).from ??
-      '',
-    toId:
-      (rel as Record<string, unknown>).toId ??
-      (rel as Record<string, unknown>).to_id ??
-      (rel as Record<string, unknown>).target ??
-      (rel as Record<string, unknown>).to ??
-      '',
-  }));
+  _r: Relationship & { source?: string; target?: string; from?: string; to?: string }
+): Relationship[] {
+  return rels.map((rel: unknown) => {
+    const r = rel as Record<string, unknown>;
+    return {
+      ...r,
+      fromId: r.fromId ?? r.from_id ?? r.source ?? r.from ?? '',
+      toId: r.toId ?? r.to_id ?? r.target ?? r.to ?? '',
+    } as Relationship;
+  });
 }
 
 function computeArgumentScores(
