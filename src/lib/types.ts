@@ -43,7 +43,8 @@ export interface Relationship {
   fromId?: string;
   to_id?: string;
   toId?: string;
-  type: 'supports' | 'contradicts' | 'depends_on' | 'attacks' | 'assumes';
+  /** supports | concludes_from (backend) | contradicts | depends_on | attacks | assumes */
+  type: 'supports' | 'contradicts' | 'depends_on' | 'attacks' | 'assumes' | 'concludes_from';
   strength: 'strong' | 'moderate' | 'weak' | string;
   label?: string;
 }
