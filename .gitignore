@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# WASM build output
+/public/wasm/
+
+# Rust build artifacts
+/clarity-engine/target/
+/clarity-engine/pkg/
+
+# Python backend
+clarity-engine-py/.venv/
+clarity-engine-py/__pycache__/
+clarity-engine-py/**/__pycache__/
+*.pyc

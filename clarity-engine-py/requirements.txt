@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pydantic
+google-genai
+networkx
+python-dotenv
+httpx
+python-sat
+sympy>=1.12
+websockets>=12.0
+json-repair>=0.7
+deepgram-sdk>=3.2.7
+elevenlabs>=0.2.27

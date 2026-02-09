@@ -1,0 +1,50 @@
+# CLARITY Project Conventions
+
+## Architecture
+- Three-layer pipeline: Gemini 3 (translation) → Rust WASM (computation) → Gemini 3 (insight)
+- Frontend: Next.js 14 App Router with React Flow for graph visualization
+- Backend: Next.js API routes calling Gemini 3 Pro and loading Rust WASM
+- All types defined in src/lib/types.ts — this is the single source of truth
+
+## Code Style
+- TypeScript strict mode
+- Functional components only, no class components
+- Use named exports, not default exports (exception: page.tsx and layout.tsx)
+- Hooks in src/hooks/, components in src/components/, utilities in src/lib/
+- API routes in src/app/api/[route]/route.ts
+- Prefer const arrow functions: export const MyComponent = () => {}
+- Use 'use client' directive only when component needs browser APIs or state
+
+## Design System
+- Import colors and fonts from src/lib/design-tokens.ts
+- Use Tailwind classes mapped to custom theme, not hardcoded colors
+- Node types: claim (cyan), evidence (green), assumption (amber), adversarial (orange), risk (rose), contradiction edges (red), bias indicators (purple)
+- Fonts: Merriweather for proposition text, JetBrains Mono for system/analysis text, Inter for UI elements
+- Background: warm off-white (#F9F9F7)
+
+## Naming
+- Components: PascalCase (ClaimNode.tsx)
+- Hooks: camelCase with use prefix (useAnalysisStream.ts)
+- Types: PascalCase interfaces (Proposition, GraphState)
+- API routes: kebab-case folders (api/parse/, api/insight/)
+- Rust files: snake_case (sat_solver.rs, cycle_detection.rs)
+
+## React Flow
+- Custom nodes extend NodeProps from reactflow
+- Custom edges extend EdgeProps from reactflow
+- Use dagre for auto-layout (top-to-bottom hierarchical)
+- Node data prop matches Proposition type from types.ts
+
+## Gemini 3 Integration
+- All Gemini calls go through src/lib/gemini-client.ts
+- Always use thinking_level: "high" for proposition parsing
+- Always use include_thoughts: true to get thought summaries
+- Maintain thought signatures across multi-turn calls
+- Use structured output (JSON schema) for proposition extraction
+- Use Google Search grounding for fact-checking in insight generation
+
+## WASM
+- Rust code lives in clarity-engine/ at repo root
+- Build with: wasm-pack build --target web --out-dir ../public/wasm
+- TypeScript bridge in src/lib/wasm-bridge.ts
+- WASM loaded dynamically in browser only (not during SSR)
