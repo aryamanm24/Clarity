@@ -9,7 +9,6 @@ import { fonts } from '@/lib/design-tokens';
 const NAV_ITEMS = [
   { href: '/', label: 'Home' },
   { href: '/analyze', label: 'Analyze' },
-  { href: '/benchmarks', label: 'Benchmarks' },
   { href: '/how-it-works', label: 'How It Works' },
 ];
 

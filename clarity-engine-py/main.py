@@ -228,7 +228,7 @@ async def generate_explanation(request: Request):
                 prompt,
                 temperature=0.7,
                 response_mime_type="text/plain",
-                model="gemini-2.0-flash",
+                model="gemini-3-flash-preview",
             ),
         )
         result = (explanation or "").strip() or fallback
@@ -287,7 +287,7 @@ async def explain_analysis(request: Request):
                 prompt,
                 temperature=0.7,
                 response_mime_type="text/plain",
-                model="gemini-2.0-flash",
+                model="gemini-3-flash-preview",
             ),
         )
         return {"explanation": (explanation or "").strip() or fallback}

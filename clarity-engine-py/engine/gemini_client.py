@@ -19,17 +19,15 @@ except ImportError:
     print("WARNING: google-genai SDK not available. Install: pip install google-genai")
 
 
-# Use gemini-2.0-flash first (fast, cheap, high rate limit) — avoid exp models to prevent 429
+# Gemini 3 preview models (Generate Content only; Live API unchanged)
 DEFAULT_MODEL_OPTIONS = [
-    "gemini-2.0-flash",
-    "gemini-1.5-flash",
-    "gemini-1.5-pro",
+    "gemini-3-flash-preview",
+    "gemini-3-pro-preview",
 ]
 
 FAST_MODEL_OPTIONS = [
-    "gemini-2.0-flash",
-    "gemini-1.5-flash",
-    "gemini-1.5-pro",
+    "gemini-3-flash-preview",
+    "gemini-3-pro-preview",
 ]
 
 

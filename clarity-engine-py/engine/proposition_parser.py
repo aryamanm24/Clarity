@@ -144,7 +144,7 @@ def parse_propositions(
             prompt=prompt,
             system_instruction=PARSER_SYSTEM_PROMPT,
             temperature=0,
-            model="gemini-2.0-flash",
+            model="gemini-3-flash-preview",
         )
     except Exception as e:
         print(f"Enhanced parsing failed: {e}")
