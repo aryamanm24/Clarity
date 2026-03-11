@@ -32,7 +32,7 @@ You (text or voice) → Parser (Gemini) → Propositions + relationships
 
 - **Frontend:** Next.js 16, React Flow (Dagre + radial layout), Tailwind, Framer Motion  
 - **Backend:** FastAPI, Python 3.12  
-- **AI:** Gemini 2.0 Flash (parsing, validity, explanation); Gemini Live (voice ack + read-aloud)  
+- **AI:** Gemini 3.0 Flash (parsing, validity, explanation); Gemini Live (voice ack + read-aloud)  
 - **Logic:** python-sat (Glucose3), NetworkX, optional Sympy  
 
 See **[TECHNICAL_DOCUMENTATION.md](./TECHNICAL_DOCUMENTATION.md)** for full architecture, endpoints, and pipeline.
